@@ -1,3 +1,4 @@
+from datetime import timedelta
 from flask import request,jsonify
 from app.models import User
 from hashlib import sha256
@@ -16,5 +17,5 @@ def login():
     if user is None  or user.password != password:
         return "Bad username or password", 401
 
-    access_token = create_access_token(identity=username)
+    access_token = create_access_token(identity=username,expires_delta=timedelta(days=1))
     return jsonify(access_token=access_token,first_name=user.first_name,last_name=user.last_name,username=user.username)

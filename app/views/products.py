@@ -23,7 +23,7 @@ class VerificationForm(FlaskForm):
     image = FileField(validators=[DataRequired()])
 
 
-@products_bp.post("/")
+@products_bp.post("/",strict_slashes=True)
 @jwt_required()
 def add_product():
     form = AddProductForm(data=request.json)
